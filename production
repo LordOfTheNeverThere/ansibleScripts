@@ -1,1 +1,30 @@
-Y
+routers:
+    hosts:
+        ciscoRouter:
+        juniperRouter:
+
+
+switches:
+    hosts:
+        SwCore1:
+        SwCore2:
+        SwEdge1:
+
+firewalls:
+    hosts:
+        opnsense:
+
+networking:
+    children:
+        routers:
+        switches:
+        firewalls:
+
+servers:
+    hosts:
+        proxmox:
+            ansible_host:10.7.7.117
+        adminNode:
+        internalNetworkServer:
+        externalNetworkServer:
+
