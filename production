@@ -30,6 +30,7 @@ servers:
     hosts:
         proxmox:
             ansible_host: 10.2.1.2
+            ansible_user: root
         adminNode:
             ansible_host: 10.100.100.2
         internalNetworkServer:
