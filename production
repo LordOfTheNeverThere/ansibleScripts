@@ -2,10 +2,14 @@ routers:
     hosts:
         ciscoRouter:
             ansible_host: 10.5.5.3
-            virtualIP: 10.5.5.1
+
         juniperRouter:
             ansible_host: 10.5.5.2
+
+        vars:
             virtualIP: 10.5.5.1
+
+
 
 switches:
     hosts:
@@ -15,6 +19,7 @@ switches:
             ansible_host: 10.5.5.5
         SwEdge1:
             ansible_host: 10.5.5.6
+
 
 firewalls:
     hosts:
@@ -38,3 +43,5 @@ networking:
         routers:
         switches:
         firewalls:
+    vars:
+        ansible_user: miguel
