@@ -1,1 +1,5 @@
+- name: Provision juniperRouter
+  hosts: juniperRouter
+  roles:
+    - juniperSRXs
 

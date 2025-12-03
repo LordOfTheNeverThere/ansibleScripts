@@ -1,0 +1,9 @@
+- name: "Do Config Backup"
+  ansible.builtin.include_tasks: getCurrentConfig.yml
+
+
+- name: Apply Juniper SRX Interface Configurations
+  junipernetworks.junos.junos_config:
+    src: interfaceAddress.j2
+    format: text # Ensure configuration is applied as text commands
+  when: interfacesToConfigure is defined and interfacesToConfigure | length > 0

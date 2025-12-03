@@ -1,0 +1,9 @@
+- name: "Do Config Backup"
+  ansible.builtin.include_tasks: getCurrentConfig.yml
+
+- name: Apply Juniper SRX Vlan Interface Configurations
+  junipernetworks.junos.junos_config:
+    src: interfaceVlanAddress.j2
+    format: text # Ensure configuration is applied as text commands
+  when: interfacesVlanToConfigure is defined and interfacesVlan~ToConfigure | length > 0
+

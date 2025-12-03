@@ -1,0 +1,20 @@
+- name: Retrieve current configuration in text format
+      junipernetworks.junos.junos_get_config:
+        format: text
+      register: currentConfig
+
+- name: Define backup file path locally
+      ansible.builtin.set_fact:
+        timestamp: "{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}"
+        backupPath: "roles/juniperSRXs/files/{{ inventory_hostname }}_config_{{ timestamp }}.cfg"
+      run_once: true
+
+- name: Write configuration
+      ansible.builtin.copy:
+        content: "{{ current_config_output.config_lines | join('\n') }}"
+        dest: "{{ backupPath }}"
+      delegate_to: localhost
+
+- name: Report saved backup file location
+      ansible.builtin.debug:
+        msg: "Configuration successfully backed up to: {{ backupPath }}"

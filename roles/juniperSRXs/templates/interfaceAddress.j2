@@ -1,0 +1,11 @@
+{% for item in interfacesToConfigure %}
+interfaces {
+    ge-0/0/{{ item.index }} {
+        unit {{ item.unit }} {
+            family inet {
+                address {{ item.ipAddress }}/{{ item.mask }};
+            }
+        }
+    }
+}
+{% endfor %}

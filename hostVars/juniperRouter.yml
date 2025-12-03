@@ -1,0 +1,32 @@
+interfacesToConfigure:
+  - index: 0
+    unit: 0
+    ipAddress: 10.10.10.1
+    mask: 24
+
+  - index: 7
+    unit: 0
+    ipAddress: 10.2.1.1
+    mask: 29
+
+  - index: 7
+    unit: 100
+    ipAddress: 10.100.100.1
+    mask: 29
+
+interfacesVlanToConfigure:
+  - index: 0
+    vlanNum: 5
+    ipAddress: 10.5.5.2
+    mask: 28
+    isManagement: True
+
+
+
+aggregatedDeviceCount: 1
+firstIntIndex: 0            # Corresponds to ge-0/0/0
+secondIntIndex: 1           # Corresponds to ge-0/0/1
+lacpMode: active
+ipAddress: 10.10.10.1
+mask: 28
+minimumLinks: 1                    # Optional: minimum physical links required for ae0 to be up

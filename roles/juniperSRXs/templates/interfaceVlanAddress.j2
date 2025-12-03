@@ -1,0 +1,16 @@
+{% for item in interfacesVlanToConfigure %}
+interfaces {
+    vlan {
+        unit {{ item.vlanNum }} {
+            family inet {
+                address {{ item.ipAddress }}/{{ item.mask }};
+            }
+        }
+    }
+}
+{% if item.isManagement | default(False) == True %}
+set vlans Management vlan-id {{ item.vlanNum }}
+set vlans l3-interface vlan.{{ item.vlanNum }}
+{% endif %}
+
+{% endfor %}

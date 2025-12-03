@@ -1,0 +1,8 @@
+# - name: "Include interface tasks"
+#   ansible.builtin.include_tasks: setInterfaces.yml
+#
+# - name: "Include vlan interface tasks"
+#   ansible.builtin.include_tasks: setVlanInterfaces.yml
+#
+# - name: "Include LACP tasks"
+#   ansible.builtin.include_tasks: setLACPInterfaces.yml
