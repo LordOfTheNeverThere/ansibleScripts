@@ -1,0 +1,23 @@
+{% set vlanList = [] %}
+
+set interfaces {{ interface }} unit 0 family ethernet-switching interface-mode trunk
+
+{% for item in trunkVlans %}
+
+{% do vlanList.append(item.vlanNum | string) %} #Create vlanList
+
+{% if (item.isNative | default(False)) %}
+delete interfaces {{ interface }} unit 0 family ethernet-switching native-vlan-id
+set interfaces {{ interface }} unit 0 family ethernet-switching native-vlan-id {{ item.vlanNum }}
+{% endif %}
+
+{% endfor %}
+
+
+{% if vlanList %}
+# All VLANs defined in the loop are allowed on the trunk
+set interfaces {{ interface }} unit 0 family ethernet-switching vlan members [ {{ vlan_list | join(' ') }} ]
+{% endif %}
+
+
+

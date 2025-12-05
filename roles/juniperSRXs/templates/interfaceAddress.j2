@@ -1,11 +1,12 @@
 {% for item in interfacesToConfigure %}
-interfaces {
-    ge-0/0/{{ item.index }} {
-        unit {{ item.unit }} {
-            family inet {
-                address {{ item.ipAddress }}/{{ item.mask }};
-            }
-        }
-    }
-}
+
+delete interfaces ge-0/0/{{ item.index }} disable
+
+{% if item.unit > 0 %}
+set interfaces ge-0/0/{{ item.index }} vlan-tagging
+set interfaces ge-0/0/{{ item.index }} unit {{ item.unit }} vlan-id {{ item.unit }}
+{% endif%}
+
+
+set interfaces ge-0/0/{{ item.index }} unit {{ item.unit }} family inet address {{ item.ipAddress }}/{{ item.mask }}
 {% endfor %}

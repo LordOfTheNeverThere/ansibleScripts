@@ -2,8 +2,9 @@
   ansible.builtin.include_tasks: getCurrentConfig.yml
 
 - name: Apply Juniper SRX Vlan Interface Configurations
-  junipernetworks.junos.junos_config:
+  juniper.device.junos_config:
     src: interfaceVlanAddress.j2
     format: text # Ensure configuration is applied as text commands
-  when: interfacesVlanToConfigure is defined and interfacesVlan~ToConfigure | length > 0
+  when: interfacesVlanToConfigure is defined and interfacesVlansToConfigure | length > 0
+  notify: Retrieve diffs
 

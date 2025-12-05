@@ -2,9 +2,9 @@
   ansible.builtin.include_tasks: getCurrentConfig.yml
 
 
-- name: Create LACP Interface
+- name: Add Vlans to Trunk
   juniper.device.junos_config:
-    src: interfaceLACP.j2
+    src: addVlansToTrunk.j2
     format: text # Ensure configuration is applied as text commands
   notify: Retrieve diffs
 

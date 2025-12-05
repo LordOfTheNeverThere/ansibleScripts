@@ -1,3 +1,5 @@
+
+
 set chassis aggregated-devices ethernet device-count {{ aggregatedDeviceCount }}
 
 set interfaces ge-0/0/{{ firstIntIndex }} ether-options 802.3ad ae0
@@ -9,5 +11,3 @@ set interfaces ae0 aggregated-ether-options lacp periodic fast
 # Configure minimum links (defaults to 1 if not specified)
 set interfaces ae0 aggregated-ether-options minimum-links {{ minimumLinks | default(1) }}
 
-# Configure Layer 3 IP Address on the logical interface ae0.0
-set interfaces ae0 unit 0 family inet address {{ ipAddress }}/{{ mask }

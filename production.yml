@@ -4,11 +4,11 @@ routers:
             ansible_host: 10.5.5.3
 
         juniperRouter:
-            ansible_host: 10.5.5.2
+            ansible_host: 10.2.1.1 # temporary
             ansible_password: "{{ textPassword }}"
 
-        vars:
-            virtualIP: 10.5.5.1
+    vars:
+        virtualIP: 10.5.5.1
 
 
 

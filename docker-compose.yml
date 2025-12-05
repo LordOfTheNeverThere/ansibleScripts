@@ -1,0 +1,10 @@
+services:
+  ansible:
+    build: .
+    container_name: ansible
+    image: ansible
+    volumes:
+      - .:/ansibleScripts
+    working_dir: /ansibleScripts
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["tail -f /dev/null"]

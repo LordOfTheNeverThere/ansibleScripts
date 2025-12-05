@@ -1,0 +1,38 @@
+interfacesToConfigure:
+  - index: 7
+    unit: 0
+    ipAddress: 10.2.1.1
+    mask: 29
+
+
+interfacesVlanToConfigure:
+  - index: 0
+    vlanNum: 5
+    ipAddress: 10.5.5.2
+    mask: 28
+    isManagement: True
+
+
+  - index: 1
+    vlanNum: 10
+    ipAddress: 10.10.10.1
+    mask: 28
+
+
+
+aggregatedDeviceCount: 1
+firstIntIndex: 0            # Corresponds to ge-0/0/0
+secondIntIndex: 1           # Corresponds to ge-0/0/1
+lacpMode: active
+minimumLinks: 1
+
+
+interface: ae0
+trunkVlans:
+
+  - index: 0
+    vlanNum: 5
+    isNative: True
+
+  - index: 1
+    vlanNum: 10

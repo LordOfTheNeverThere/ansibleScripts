@@ -1,3 +1,5 @@
-#SPDX-License-Identifier: MIT-0
----
-# handlers file for juniperSRXs
+- name: Retrieve diffs
+  juniper.device.config:
+    diff: true
+    diffs_file: "roles/juniperSRXs/files/diffs/{{ inventory_hostname }}_lastDiff.cfg"
+    format: text

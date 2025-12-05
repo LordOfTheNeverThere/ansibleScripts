@@ -1,8 +1,18 @@
-# - name: "Include interface tasks"
-#   ansible.builtin.include_tasks: setInterfaces.yml
+- name: Check NETCONF connectivity
+  ansible.builtin.wait_for: 
+    host: "{{ ansible_host }}"
+    port: 830 
+    timeout: 5
+
+
+- name: "Include interface tasks"
+  ansible.builtin.include_tasks: setInterfaces.yml
 #
 # - name: "Include vlan interface tasks"
 #   ansible.builtin.include_tasks: setVlanInterfaces.yml
 #
 # - name: "Include LACP tasks"
 #   ansible.builtin.include_tasks: setLACPInterfaces.yml
+#
+# - name: "Assign LACP as a trunk to Vlans previously configured"
+#   ansible.builtin.include_tasks: addVlanToTrunk.yml

@@ -1,16 +1,11 @@
 {% for item in interfacesVlanToConfigure %}
-interfaces {
-    vlan {
-        unit {{ item.vlanNum }} {
-            family inet {
-                address {{ item.ipAddress }}/{{ item.mask }};
-            }
-        }
-    }
-}
-{% if item.isManagement | default(False) == True %}
-set vlans Management vlan-id {{ item.vlanNum }}
-set vlans l3-interface vlan.{{ item.vlanNum }}
-{% endif %}
+
+set interfaces vlan unit {{ item.vlanNum }} family inet address {{ item.ipAddress }}/{{ item.mask }}
+
+set vlans {{ item.name }} vlan-id {{ item.vlanNum }}
+set vlans {{ item.name }} l3-interface vlan.{{ item.vlanNum }}
 
 {% endfor %}
+
+
+
