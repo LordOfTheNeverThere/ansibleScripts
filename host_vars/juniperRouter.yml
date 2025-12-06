@@ -1,10 +1,22 @@
 interfacesToConfigure:
 
-  - index: 5
-    unit: 0
-    ipAddress: 10.15.15.1
-    mask: 29
+  - index: 1
+    disable: True
 
+  - index: 2
+    disable: True
+
+  - index: 3
+    disable: True
+
+  - index: 4
+    disable: True
+
+  - index: 5
+    disable: True
+
+  - index: 6
+    disable: True
 
   - index: 7
     unit: 0
