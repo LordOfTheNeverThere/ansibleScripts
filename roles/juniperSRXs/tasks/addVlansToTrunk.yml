@@ -1,10 +1,20 @@
-- name: "Do Config Backup"
-  ansible.builtin.include_tasks: getCurrentConfig.yml
+
+
+- ansible.builtin.set_fact:
+    tempFile: "roles/juniperSRXs/templates/addVlansToTrunk.j2"
 
 
 - name: Add Vlans to Trunk
   juniper.device.config:
-    src: addVlansToTrunk.j2
-    format: text # Ensure configuration is applied as text commands
-  notify: Retrieve diffs
+    lines: "{{ lookup('ansible.builtin.template', tempFile) | split('\n') }}"
+    load: set
+    format: set
+    commit: true
+    timeout: 180
+    ignore_warning:
+      - statement not found
+  register: response
 
+- name: Print the complete response.
+  ansible.builtin.debug:
+    var: response

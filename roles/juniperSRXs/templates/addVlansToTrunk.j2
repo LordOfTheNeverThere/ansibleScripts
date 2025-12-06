@@ -1,10 +1,8 @@
-{% set vlanList = [] %}
+{% set vlanList = trunkVlans | map(attribute='vlanNum') | map('string') | list %}
 
-set interfaces {{ interface }} unit 0 family ethernet-switching interface-mode trunk
+set interfaces {{ interface }} unit 0 family ethernet-switching port-mode trunk
 
 {% for item in trunkVlans %}
-
-{% do vlanList.append(item.vlanNum | string) %} #Create vlanList
 
 {% if (item.isNative | default(False)) %}
 delete interfaces {{ interface }} unit 0 family ethernet-switching native-vlan-id
@@ -13,9 +11,8 @@ set interfaces {{ interface }} unit 0 family ethernet-switching native-vlan-id {
 
 {% endfor %}
 
-
 {% if vlanList %}
-set interfaces {{ interface }} unit 0 family ethernet-switching vlan members [ {{ vlan_list | join(' ') }} ]
+set interfaces {{ interface }} unit 0 family ethernet-switching vlan members [ {{ vlanList | join(' ') }} ]
 {% endif %}
 
 
