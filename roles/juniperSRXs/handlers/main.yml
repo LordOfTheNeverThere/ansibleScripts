@@ -2,4 +2,3 @@
   juniper.device.config:
     diff: true
     diffs_file: "roles/juniperSRXs/files/diffs/{{ inventory_hostname }}_lastDiff.cfg"
-    format: text

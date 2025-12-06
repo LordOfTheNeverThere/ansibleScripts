@@ -1,10 +1,30 @@
 - name: "Do Config Backup"
   ansible.builtin.include_tasks: getCurrentConfig.yml
 
-- name: Apply Juniper SRX Vlan Interface Configurations
-  juniper.device.junos_config:
-    src: interfaceVlanAddress.j2
-    format: text # Ensure configuration is applied as text commands
-  when: interfacesVlanToConfigure is defined and interfacesVlansToConfigure | length > 0
-  notify: Retrieve diffs
 
+
+- ansible.builtin.set_fact:
+    tempFile: "roles/juniperSRXs/templates/interfaceVlanAddress.j2"
+
+
+
+- name: Apply Juniper SRX Vlan Interface Configurations
+  juniper.device.config:
+    lines: "{{ lookup('ansible.builtin.template', tempFile) | split('\n') }}"
+    load: set
+    format: set
+    commit: true
+    timeout: 180
+    ignore_warning:
+      - statement not found
+  register: response
+  when: interfacesVlanToConfigure is defined and interfacesVlanToConfigure | length > 0
+  notify: 
+    - Retrieve diffs
+
+- name: Print the complete response.
+  ansible.builtin.debug:
+    var: response
+
+- name: "Do Rollback"
+  ansible.builtin.include_tasks: rollback.yml

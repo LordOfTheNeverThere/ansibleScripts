@@ -3,7 +3,7 @@
 
 
 - name: Create LACP Interface
-  juniper.device.junos_config:
+  juniper.device.config:
     src: interfaceLACP.j2
     format: text # Ensure configuration is applied as text commands
   notify: Retrieve diffs
