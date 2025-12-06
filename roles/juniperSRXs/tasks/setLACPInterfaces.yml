@@ -1,10 +1,24 @@
 - name: "Do Config Backup"
   ansible.builtin.include_tasks: getCurrentConfig.yml
 
+- ansible.builtin.set_fact:
+    tempFile: "roles/juniperSRXs/templates/interfaceLACP.j2"
 
 - name: Create LACP Interface
   juniper.device.config:
-    src: interfaceLACP.j2
-    format: text # Ensure configuration is applied as text commands
+    lines: "{{ lookup('ansible.builtin.template', tempFile) | split('\n') }}"
+    load: set
+    format: set
+    commit: true
+    timeout: 180
+    ignore_warning:
+      - statement not found
+  register: response
   notify: Retrieve diffs
 
+- name: Print the complete response.
+  ansible.builtin.debug:
+    var: response
+
+- name: "Do Rollback"
+  ansible.builtin.include_tasks: rollback.yml

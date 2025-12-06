@@ -15,7 +15,6 @@ set interfaces {{ interface }} unit 0 family ethernet-switching native-vlan-id {
 
 
 {% if vlanList %}
-# All VLANs defined in the loop are allowed on the trunk
 set interfaces {{ interface }} unit 0 family ethernet-switching vlan members [ {{ vlan_list | join(' ') }} ]
 {% endif %}
 

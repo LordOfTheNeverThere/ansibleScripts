@@ -11,8 +11,8 @@
 - name: "Include vlan interface tasks"
   ansible.builtin.include_tasks: setVlanInterfaces.yml
 
-# - name: "Include LACP tasks"
-#   ansible.builtin.include_tasks: setLACPInterfaces.yml
+- name: "Include LACP tasks"
+  ansible.builtin.include_tasks: setLACPInterfaces.yml
 
 # - name: "Assign LACP as a trunk to Vlans previously configured"
 #   ansible.builtin.include_tasks: addVlanToTrunk.yml
