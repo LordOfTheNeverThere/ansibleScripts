@@ -1,26 +1,31 @@
-- name: "Do Config Backup"
-  ansible.builtin.include_tasks: getCurrentConfig.yml
+# - name: "Do Config Backup"
+#   ansible.builtin.include_tasks: getCurrentConfig.yml
 
 
-- ansible.builtin.set_fact:
-    tempFile: "roles/juniperSRXs/templates/interfaceAddress.j2"
+# - ansible.builtin.set_fact:
+#     tempFile: "roles/juniperSRXs/templates/interfaceAddress.j2"
 
 
-- name: Apply Juniper SRX Interface Configurations
-  juniper.device.config:
-    lines: "{{ lookup('ansible.builtin.template', tempFile) | split('\n') }}"
-    load: set
-    format: set
-    commit: true
-    timeout: 180
-    ignore_warning:
-      - statement not found
-  register: response
-  when: interfacesToConfigure is defined and interfacesToConfigure | length > 0
-  notify: Retrieve diffs
+# - name: Apply Juniper SRX Interface Configurations
+#   juniper.device.config:
+#     lines: "{{ lookup('ansible.builtin.template', tempFile) | split('\n') }}"
+#     load: set
+#     format: set
+#     commit: true
+#     timeout: 180
+#     ignore_warning:
+#       - statement not found
+#   register: response
+#   when: interfacesToConfigure is defined and interfacesToConfigure | length > 0
+#   notify: 
+#     - juniperSRXs : Retrieve diffs 
 
 
-- name: Print the complete response.
-  ansible.builtin.debug:
-    var: response
+# - name: Print the complete response.
+#   ansible.builtin.debug:
+#     var: response
     
+
+
+- name: "Do Rollback"
+  ansible.builtin.include_tasks: rollback.yml

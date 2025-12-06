@@ -5,13 +5,15 @@
 
 
 
-- name: Retrieve current configuration
+- name: Rollback configuration
   juniper.device.config:
-    retrieve: committed
-    dest: "{{ backupPath }}"
+    load: update
+    src: "{{ backupPath }}"
     format: text
+    commit: true
+    timeout: 180
 
 
-- name: Report saved backup file location
+- name: Report Rollback
   ansible.builtin.debug:
-    msg: "Configuration successfully backed up to: {{ backupPath }}"
+    msg: "Configuration successfully rollbacked using: {{ backupPath }}"
