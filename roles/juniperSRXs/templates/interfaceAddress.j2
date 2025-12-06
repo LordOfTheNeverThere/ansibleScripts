@@ -2,7 +2,9 @@
 
 {% if item.disable | default(False) %}
 delete interfaces ge-0/0/{{ item.index }}
+delete security zones security-zone trust interfaces ge-0/0/{{ item.index }}
 set interfaces ge-0/0/{{ item.index }} disable
+
 
 {% elif item.unit > 0 %}
 set interfaces ge-0/0/{{ item.index }} vlan-tagging
@@ -11,5 +13,6 @@ delete interfaces ge-0/0/{{ item.index }} disable
 
 {% elif item.unit == 0 %}
 set interfaces ge-0/0/{{ item.index }} unit {{ item.unit }} family inet address {{ item.ipAddress }}/{{ item.mask }}
+set security zones security-zone trust interfaces ge-0/0/{{ item.index }}
 {% endif  %}
 {% endfor %}

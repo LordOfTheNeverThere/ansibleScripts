@@ -11,3 +11,5 @@ set interfaces ae0 aggregated-ether-options lacp periodic fast
 # Configure minimum links (defaults to 1 if not specified)
 set interfaces ae0 aggregated-ether-options minimum-links {{ minimumLinks | default(1) }}
 
+set security zones security-zone trust interfaces ae0
+

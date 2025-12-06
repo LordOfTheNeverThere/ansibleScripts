@@ -1,4 +1,9 @@
+
+
 interfacesToConfigure:
+
+  - index: 0
+    disable: True
 
   - index: 1
     disable: True
