@@ -1,8 +1,13 @@
 routers:
     hosts:
         ciscoRouter:
-            ansible_host: 10.5.5.3
-
+            ansible_host: 10.3.1.1
+            ansible_password: "{{ numberPasswordWeak }}"
+            ansible_connection: network_cli
+            ansible_network_os: ios
+            ansible_become: yes
+            ansible_become_method: enable
+            ansible_become_pass: "{{ textPassword }}"
         juniperRouter:
             ansible_host: 10.2.1.1 # temporary
             ansible_password: "{{ textPassword }}"

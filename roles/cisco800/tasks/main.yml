@@ -1,3 +1,22 @@
-#SPDX-License-Identifier: MIT-0
----
-# tasks file for cisco800
+- ansible.builtin.set_fact:
+    dirPath: "roles/cisco800/files/backups/"
+    fileName: "{{ inventory_hostname }}_configBackup.cfg"
+    loadPath: "roles/cisco800/files/backups/{{ inventory_hostname }}_configBackup.cfg" 
+  run_once: true
+
+
+
+- name: Create Config backup
+  ios_config:
+    backup: true
+    backup_options:
+      filename: "{{ fileName }}"
+      dir_path: "{{ dirPath }}"
+
+
+- name: Rollback config
+  ios_config:
+    src: "{{ loadPath }}"
+    save_when: modified
+
+
