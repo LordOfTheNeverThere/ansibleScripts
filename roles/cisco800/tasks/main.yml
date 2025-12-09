@@ -14,8 +14,8 @@
         lines:
           - ip route 0.0.0.0 0.0.0.0 {{ defaultGateway }}
         save_when: modified
-  # - name: Set SSH Daemon in Router
-  #   ansible.builtin.include_tasks: configureSSHDaemon.yml
+  - name: Set SSH Daemon in Router
+    ansible.builtin.include_tasks: configureSSHDaemon.yml
   # - name: Enable OSPF dynamic Routing
   #   ansible.builtin.include_tasks: enableOSPFRouting.yml
 

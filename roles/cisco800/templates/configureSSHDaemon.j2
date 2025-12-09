@@ -2,7 +2,7 @@
 
 ip access-list standard neoSshACL
 {% for item in networksAllowedSSH %}
- permit {{ item.ip }} {{ ip.submask }}
+ permit {{ item.ip }} {{ item.submask }}
 {% endfor %}
  deny any log
 
