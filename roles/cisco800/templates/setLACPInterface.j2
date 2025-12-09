@@ -1,0 +1,11 @@
+{% for item in lacpDownlinkMembers %}
+interface FastEthernet{{ item.index }}
+ channel-group 1 mode active
+{% endfor %}
+interface po1
+
+ {% for item in lacpConfig %}
+ {{ item.command }}
+ {% endfor %}
+
+ 
