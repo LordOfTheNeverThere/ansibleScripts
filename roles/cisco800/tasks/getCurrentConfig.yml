@@ -1,0 +1,13 @@
+- ansible.builtin.set_fact:
+    dirPath: "roles/cisco800/files/backups/"
+    fileName: "{{ inventory_hostname }}_configBackup.cfg"
+  run_once: true
+
+
+
+- name: Create Config backup
+  ios_config:
+    backup: true
+    backup_options:
+      filename: "{{ fileName }}"
+      dir_path: "{{ dirPath }}"

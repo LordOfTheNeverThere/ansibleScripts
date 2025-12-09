@@ -1,0 +1,16 @@
+
+{% for item in interfacesToAddVlan%}
+interface FastEthernet{{ item.index }}
+ no shutdown
+ 
+ {% if item.trunk %}
+ switchport mode trunk
+ switchport trunk native vlan {{ item.native }}
+ switchport trunk allowed vlan 1,{{ item.allowed }},1002-1005
+
+ {% else %}
+ switchport mode access
+ switchport access vlan {{ item.native }}
+ {% endif %}
+
+{% endfor %}

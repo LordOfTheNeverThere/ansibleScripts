@@ -1,0 +1,44 @@
+defaultGateway: 10.3.1.2
+
+interfaceVlansConfig:
+- index: 0
+  num: 5
+  name: Management
+  ip: 10.5.5.3
+  submask: 255.255.255.240
+
+- index: 1
+  num: 50
+  name: External_Services_Network
+  ip: 10.50.50.1
+  submask: 255.255.255.240
+
+- index: 2
+  num: 51
+  name: Link_To_OPNsense
+  ip: 10.3.1.1
+  submask: 255.255.255.248
+
+interfacesToAddVlan:
+- index: 0
+  trunk: True
+  native: 5
+  allowed: 5,50
+
+- index: 3
+  trunk: False
+  native: 51
+
+networksAllowedSSH:
+- index: 0
+  ip: 10.7.7.74
+  submask: 255.255.255.255
+
+- index: 1
+  ip: 10.2.1.0
+  submask: 255.255.255.248
+
+- index: 2
+  ip: 10.10.10.0
+  submask: 255.255.255.240
+

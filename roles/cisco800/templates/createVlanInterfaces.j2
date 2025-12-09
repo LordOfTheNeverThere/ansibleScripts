@@ -1,0 +1,8 @@
+
+{% for item in interfaceVlansConfig %}
+interface vlan {{ item.num }}
+ ip address {{ item.ip }} {{ item.submask }}
+ no shutdown
+vlan {{ item.num }}
+ name {{ item.name }}
+{% endfor %}

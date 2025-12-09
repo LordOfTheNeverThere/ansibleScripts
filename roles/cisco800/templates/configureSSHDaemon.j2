@@ -1,0 +1,13 @@
+
+
+ip access-list standard sshACL
+{% for item in networksAllowedSSH %}
+ permit {{ item.ip }} {{ ip.submask }}
+{% endfor %}
+ deny any log
+
+line vty 0 4
+ access-class sshACL in
+ exec-timeout 30 0
+ login local
+ transport input ssh

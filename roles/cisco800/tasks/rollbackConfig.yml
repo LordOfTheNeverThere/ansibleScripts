@@ -1,0 +1,8 @@
+- ansible.builtin.set_fact:
+    loadPath: "roles/cisco800/files/backups/{{ inventory_hostname }}_configBackup.cfg" 
+  run_once: true
+
+- name: Rollback config
+  ios_config:
+    src: "{{ loadPath }}"
+    save_when: modified
