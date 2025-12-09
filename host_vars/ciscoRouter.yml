@@ -26,8 +26,9 @@ interfacesToAddVlan:
   allowed: 5,50
 
 - index: 3
-  trunk: False
+  trunk: True
   native: 51
+  allowed: 5,51
 
 networksAllowedSSH:
 - index: 0
