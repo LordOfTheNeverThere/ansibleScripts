@@ -12,7 +12,7 @@
   - name: Set default gateway (10.3.1.2)
     ios_config:
         lines:
-          - ip route 0.0.0.0 0.0.0.0 "{{ defaultGateway }}"
+          - ip route 0.0.0.0 0.0.0.0 {{ defaultGateway }}
         save_when: modified
   # - name: Set SSH Daemon in Router
   #   ansible.builtin.include_tasks: configureSSHDaemon.yml
