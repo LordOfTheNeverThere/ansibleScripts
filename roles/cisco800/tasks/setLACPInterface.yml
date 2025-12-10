@@ -1,5 +1,0 @@
-
-
-- ios_config:
-    src: roles/cisco800/templates/setLACPInterface.j2
-    save_when: modified

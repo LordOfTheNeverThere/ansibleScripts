@@ -1,0 +1,10 @@
+router ospfv3 1
+ router-id {{ osfpRouterId }}
+ {% for item in networksToAdvertiseOSPF %}
+ network {{ item.ip }} {{ item.subMask | default('0.0.0.0') }} area 0
+ 
+ {% if  item.passive | default(False)  %}
+ passive-interface {{ item.intName }}
+ {% endif %}
+
+ {% endfor %}
