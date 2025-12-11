@@ -1,0 +1,16 @@
+- ansible.builtin.set_fact:
+    tempFile: "roles/juniperSRXs/templates/enableOSPFRouting.j2"
+
+
+- name: Enable OSPF Routing
+  juniper.device.config:
+    lines: "{{ lookup('ansible.builtin.template', tempFile) | split('\n') }}"
+    load: set
+    format: set
+    commit: true
+    timeout: 180
+  register: response
+
+- name: Print the complete response.
+  ansible.builtin.debug:
+    var: response

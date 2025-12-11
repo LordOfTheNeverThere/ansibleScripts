@@ -1,10 +1,21 @@
-router ospfv3 1
- router-id {{ osfpRouterId }}
- {% for item in networksToAdvertiseOSPF %}
- network {{ item.ip }} {{ item.subMask | default('0.0.0.0') }} area 0
+{% for item in networksToAdvertiseOSPF %}
+router ospf {{ item.processId | default(1) }}
+
+ network {{ item.ip }} {{ item.subMask | default('0.0.0.0') }} area {{ item.area | default(0) }}
  
  {% if  item.passive | default(False)  %}
+ 
  passive-interface {{ item.intName }}
  {% endif %}
 
+{% if item.isPointToPoint | default(False) %}
+
+interface{{ item.intName }}
+ ip osfp network point-to-point
+{% endif %}
+
  {% endfor %}
+
+
+router ospf {{ item.processId | default(1) }}
+ router-id {{ osfpRouterId }}

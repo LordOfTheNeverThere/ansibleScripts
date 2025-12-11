@@ -1,0 +1,17 @@
+{% for item in networksToAdvertiseOSPF %}
+ 
+ {% if  item.passive | default(False)  %}
+ 
+ set protocols ospf area {{ item.area | default(0) }} interface {{ item.intName }} passive
+ {% elif  item.isPointToPoint %}
+
+ set protocols ospf area {{ item.area | default(0) }} interface {{ item.intName }} interface-type p2p
+ {% else %}
+
+ set protocols ospf area {{ item.area | default(0) }} interface {{ item.intName }}
+ {% endif %}
+{% endfor %}
+
+{% if ospfRouterId %}
+set routing-options router-id {{ ospfRouterId }} 
+{% endif %}

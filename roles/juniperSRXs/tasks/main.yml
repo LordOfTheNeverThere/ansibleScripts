@@ -20,6 +20,11 @@
 
     - name: "Assign LACP as a trunk to Vlans previously configured"
       ansible.builtin.include_tasks: addVlansToTrunk.yml
+
+    - name: "Set OSPF Routing"
+      ansible.builtin.include_tasks: enableOSPFRouting.yml
   rescue:
     - name: "Do Rollback"
       ansible.builtin.include_tasks: rollback.yml
+- name: "Do Rollback"
+  ansible.builtin.include_tasks: rollback.yml

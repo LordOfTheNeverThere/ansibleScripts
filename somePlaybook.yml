@@ -1,15 +1,15 @@
 
-# - name: Provision juniperRouter
-#   hosts: juniperRouter
-#   connection: local
-#   roles:
-#     - juniperSRXs
-
-- name: Provision ciscoRouter
-  hosts: ciscoRouter
+- name: Provision juniperRouter
+  hosts: juniperRouter
   connection: local
-  gather_facts: no
   roles:
-    - cisco800
+    - juniperSRXs
+
+# - name: Provision ciscoRouter
+#   hosts: ciscoRouter
+#   connection: local
+#   gather_facts: no
+#   roles:
+#     - cisco800
 
 

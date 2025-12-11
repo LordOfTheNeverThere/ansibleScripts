@@ -62,3 +62,21 @@ trunkVlans:
 
   - index: 1
     vlanNum: 10
+
+
+
+networksToAdvertiseOSPF:
+
+- index: 0
+  intName: ge-0/0/7
+  isPointToPoint: True
+
+- index: 1
+  intName: vlan.5
+  passive: True
+
+- index: 2
+  intName: vlan.10
+  passive: True
+
+ospfRouterId: 2.2.2.2
