@@ -1,4 +1,4 @@
 
 - ios_config:
     src: roles/cisco800/templates/createVlanInterfaces.j2
-    save_when: modified
+    save_when: changed

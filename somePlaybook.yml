@@ -1,9 +1,9 @@
 
-- name: Provision juniperRouter
-  hosts: juniperRouter
-  connection: local
-  roles:
-    - juniperSRXs
+# - name: Provision juniperRouter
+#   hosts: juniperRouter
+#   connection: local
+#   roles:
+#     - juniperSRXs
 
 - name: Provision ciscoRouter
   hosts: ciscoRouter

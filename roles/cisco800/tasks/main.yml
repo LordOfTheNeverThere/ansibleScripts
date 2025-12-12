@@ -1,32 +1,35 @@
 
 
-- name: "Do Config Backup"
-  ansible.builtin.include_tasks: getCurrentConfig.yml
+# - name: "Do Config Backup"
+#   ansible.builtin.include_tasks: getCurrentConfig.yml
 
 
-- block:
-  - name: Configure Vlan Interfaces
-    ansible.builtin.include_tasks: createVlanInterfaces.yml
-  - name: Add Vlan tags To interfaces
-    ansible.builtin.include_tasks: addTagsToInterfaces.yml
-  - name: Set default gateway (10.3.1.2)
-    ios_config:
-        lines:
-          - ip route 0.0.0.0 0.0.0.0 {{ defaultGateway }}
-        save_when: modified
-  - name: Set SSH Daemon in Router
-    ansible.builtin.include_tasks: configureSSHDaemon.yml
+# - block:
+#   - name: Configure Vlan Interfaces
+#     ansible.builtin.include_tasks: createVlanInterfaces.yml
+#   - name: Add Vlan tags To interfaces
+#     ansible.builtin.include_tasks: addTagsToInterfaces.yml
+#   - name: Set default gateway (10.3.1.2)
+#     ios_config:
+#         lines:
+#           - ip route 0.0.0.0 0.0.0.0 {{ defaultGateway }}
+#         save_when: changed
+#   - name: Set SSH Daemon in Router
+#     ansible.builtin.include_tasks: configureSSHDaemon.yml
 
-  - name: Enable OSPF dynamic Routing
-    ansible.builtin.include_tasks: enableOSPFRouting.yml
+#   - name: Enable OSPF dynamic Routing
+#     ansible.builtin.include_tasks: enableOSPFRouting.yml
 
-  - name: Set flouting default gateway route
-    ansible.builtin.include_tasks: setFloatingDefGateRouteRouting.yml
+#   - name: Set flouting default gateway route
+#     ansible.builtin.include_tasks: setFloatingDefGateRouteRouting.yml
+
+#   - name: Set FHRP on Management subnet
+#     ansible.builtin.include_tasks: setFHRP.yml
 
 
-  rescue:
-    - name: "Do Rollback"
-      ansible.builtin.include_tasks: rollbackConfig.yml
+#   rescue:
+#     - name: "Do Rollback"
+#       ansible.builtin.include_tasks: rollbackConfig.yml
 
 
 

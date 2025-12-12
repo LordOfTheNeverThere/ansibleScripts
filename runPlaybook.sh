@@ -1,0 +1,1 @@
+ansible-playbook -i production.yml somePlaybook.yml --ask-vault-pass -vvv

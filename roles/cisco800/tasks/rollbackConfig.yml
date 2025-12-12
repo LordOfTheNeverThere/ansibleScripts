@@ -1,8 +1,34 @@
 - ansible.builtin.set_fact:
-    loadPath: "roles/cisco800/files/backups/{{ inventory_hostname }}_configBackup.cfg" 
+    fileName: "{{ inventory_hostname }}_configBackup.cfg"
   run_once: true
 
-- name: Rollback config
-  ios_config:
+
+- ansible.builtin.set_fact:
+    loadPath: "roles/cisco800/files/backups/{{ fileName }}" 
+  run_once: true
+
+
+- name: Ensure SCP is enabled on the device
+  cisco.ios.ios_config:
+    lines:
+      - ip scp server enable
+
+- name: Copy local .cfg file to router flash
+  ansible.netcommon.net_put:
     src: "{{ loadPath }}"
-    save_when: modified
+    dest: "flash:{{ fileName }}"
+    protocol: scp
+
+- name: Replace running-config with the new file
+  cisco.ios.ios_command:
+    commands:
+      - command: "configure replace flash:{{ fileName }} force"
+  register: replaceOutput
+
+- name: Show the output of the replace operation
+  debug:
+    var: replaceOutput.stdout
+
+- name: Save running-config to startup-config
+  cisco.ios.ios_config:
+    save_when: always
