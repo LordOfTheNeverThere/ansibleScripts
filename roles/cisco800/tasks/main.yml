@@ -16,8 +16,12 @@
         save_when: modified
   - name: Set SSH Daemon in Router
     ansible.builtin.include_tasks: configureSSHDaemon.yml
+
   - name: Enable OSPF dynamic Routing
     ansible.builtin.include_tasks: enableOSPFRouting.yml
+
+  - name: Set flouting default gateway route
+    ansible.builtin.include_tasks: setFloatingDefGateRouteRouting.yml
 
 
   rescue:

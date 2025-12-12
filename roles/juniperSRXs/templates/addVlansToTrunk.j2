@@ -1,19 +1,19 @@
-{% set vlanList = trunkVlans | map(attribute='vlanNum') | map('string') | list %}
+{% for mapping in vlanToInterfaceMappings %}
 
-set interfaces {{ interface }} unit 0 family ethernet-switching port-mode trunk
 
-{% for item in trunkVlans %}
+{% set vlanList = mapping.vlans | map(attribute='vlanNum') | map('string') | list %}
 
-{% if (item.isNative | default(False)) %}
-delete interfaces {{ interface }} unit 0 family ethernet-switching native-vlan-id
-set interfaces {{ interface }} unit 0 family ethernet-switching native-vlan-id {{ item.vlanNum }}
+set interfaces {{ mapping.interface }} unit 0 family ethernet-switching port-mode trunk
+
+{% for vlan in mapping.vlans %}
+{% if (vlan.isNative | default(False)) %}
+delete interfaces {{ mapping.interface }} unit 0 family ethernet-switching native-vlan-id
+set interfaces {{ mapping.interface }} unit 0 family ethernet-switching native-vlan-id {{ vlan.vlanNum }}
 {% endif %}
 
 {% endfor %}
 
 {% if vlanList %}
-set interfaces {{ interface }} unit 0 family ethernet-switching vlan members [ {{ vlanList | join(' ') }} ]
+set interfaces {{ mapping.interface }} unit 0 family ethernet-switching vlan members [ {{ vlanList | join(' ') }} ]
 {% endif %}
-
-
-
+{% endfor %}

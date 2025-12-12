@@ -46,22 +46,15 @@ interfacesVlanToConfigure:
 
 
 
-aggregatedDeviceCount: 1
-firstIntIndex: 0            # Corresponds to ge-0/0/0
-secondIntIndex: 1           # Corresponds to ge-0/0/1
-lacpMode: active
-minimumLinks: 1
+vlanToInterfaceMappings:
 
+  - interface: ge-0/0/0
+    vlans: 
+      - vlanNum: 5
+        isNative: True
 
-interface: ae0
-trunkVlans:
+      - vlanNum: 10
 
-  - index: 0
-    vlanNum: 5
-    isNative: True
-
-  - index: 1
-    vlanNum: 10
 
 
 

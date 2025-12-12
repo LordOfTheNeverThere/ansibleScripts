@@ -29,7 +29,7 @@ interfacesToAddVlan:
 - index: 3
   trunk: True
   native: 51
-  allowed: 5,51
+  allowed: 5,50,51
 
 networksAllowedSSH:
 - index: 0
@@ -61,7 +61,7 @@ networksToAdvertiseOSPF:
   ip: 10.50.50.1
   passive: True
 
-osfpRouterId: 3.3.3.3
+ospfRouterId: 3.3.3.3
 
 
 

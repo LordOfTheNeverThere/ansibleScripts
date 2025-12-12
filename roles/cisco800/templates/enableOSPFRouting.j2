@@ -10,12 +10,12 @@ router ospf {{ item.processId | default(1) }}
 
 {% if item.isPointToPoint | default(False) %}
 
-interface{{ item.intName }}
- ip osfp network point-to-point
+interface {{ item.intName }}
+ ip ospf network point-to-point
 {% endif %}
 
  {% endfor %}
 
 
 router ospf {{ item.processId | default(1) }}
- router-id {{ osfpRouterId }}
+ router-id {{ ospfRouterId }}
