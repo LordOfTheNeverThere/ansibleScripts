@@ -1,0 +1,6 @@
+interface {{ vrrpInterface }}
+ vrrp 1 ip {{ vrrpVirtualIp }}
+ vrrp 1 priority {{ vrrpPriority }}
+ {% if vrrpPreempt | default(False) %}
+ vrrp 1 preempt
+ {% endif %}

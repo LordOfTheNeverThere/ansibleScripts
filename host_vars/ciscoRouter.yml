@@ -63,6 +63,10 @@ networksToAdvertiseOSPF:
 
 ospfRouterId: 3.3.3.3
 
+vrrpInterface: Vlan5
+vrrpVirtualIp: 10.5.5.1
+vrrpPriority: 50
+
 
 
 

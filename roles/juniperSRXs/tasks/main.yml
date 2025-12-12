@@ -11,6 +11,9 @@
 
     - name: "Include interface tasks"
       ansible.builtin.include_tasks: setInterfaces.yml
+    
+    - name: "Add Default route"
+      ansible.builtin.include_tasks: setDefRoute.yml
 
     - name: "Include vlan interface tasks"
       ansible.builtin.include_tasks: setVlanInterfaces.yml
@@ -22,7 +25,12 @@
       ansible.builtin.include_tasks: enableOSPFRouting.yml
       
     - name: "Add redundant floating Default route"
-      ansible.builtin.include_tasks: addFloatDefRoute.yml
+      vars:
+        staticDefGateMetric: 190
+      ansible.builtin.include_tasks: setDefRoute.yml
+
+    - name: "Enable VRRP for management subnet"
+      ansible.builtin.include_tasks: setVRRP.yml
 
   rescue:
     - name: "Do Rollback"

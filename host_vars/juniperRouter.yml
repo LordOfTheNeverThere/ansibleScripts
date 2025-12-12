@@ -73,3 +73,10 @@ networksToAdvertiseOSPF:
   passive: True
 
 ospfRouterId: 2.2.2.2
+
+vrrpInterface: vlan.5
+vrrpVirtualIp: 10.5.5.1
+vrrpPriority: 100
+vrrpPreempt: True
+physicalIP: 10.5.5.2
+subnet: 28
