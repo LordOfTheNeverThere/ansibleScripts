@@ -58,7 +58,7 @@
           mode: "trunk"
           nativeVlan: 5
           vlans: "5,50"  
-
+# TODO: Update default Gateway to virtual IP
 
   rescue:
     - name: "Do Rollback"

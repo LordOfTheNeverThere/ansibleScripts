@@ -58,7 +58,7 @@
           
         - name: "Gi0/1"
           active: False
-
+# TODO: Update default Gateway to virtual IP
   rescue:
     - name: "Do Rollback"
       ansible.builtin.include_tasks: ../../cisco/tasks/rollbackConfig.yml

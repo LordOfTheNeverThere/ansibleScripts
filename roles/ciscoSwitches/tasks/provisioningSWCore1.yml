@@ -59,7 +59,7 @@
           nativeVlan: 5
           vlans: "5,10"   
 
-
+# TODO: Update default Gateway to virtual IP
 
   rescue:
     - name: "Do Rollback"
