@@ -1,9 +1,9 @@
 
 spanning-tree mode  rapid-pvst
 
-{% for vlan in Vlans %}
+{% for vlan in vlans %}
 vlan {{ vlan.num }}
  name {{ vlan.name }}
-spanning-tree vlan {{ vlan.num }} {{ vlan.stpBridgePriority }}
+spanning-tree vlan {{ vlan.num }} priority {{ vlan.stpBridgePriority }}
 
 {% endfor %}

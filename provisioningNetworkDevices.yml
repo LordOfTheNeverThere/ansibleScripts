@@ -1,9 +1,9 @@
 
-- name: Provision juniperRouter
-  hosts: juniperRouter
-  connection: local
-  roles:
-    - juniperSRXs
+# - name: Provision juniperRouter
+#   hosts: juniperRouter
+#   connection: local
+#   roles:
+#     - juniperSRXs
 
 # - name: Provision ciscoRouter
 #   hosts: ciscoRouter
@@ -18,3 +18,11 @@
 #   - ansible.builtin.include_role:
 #       name: ciscoSwitches
 #       tasks_from: provisioningSWCore1.yml 
+
+- name: Provision SwCore2
+  hosts: SwCore2
+  gather_facts: no
+  tasks:
+  - ansible.builtin.include_role:
+      name: ciscoSwitches
+      tasks_from: provisioningSWCore2.yml 

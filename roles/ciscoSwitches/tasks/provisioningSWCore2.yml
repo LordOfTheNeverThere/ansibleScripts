@@ -52,7 +52,7 @@
     ansible.builtin.include_tasks: setInterfaceStatus.yml
     vars:
       interfaces:
-        - name: "FastEthernet5"
+        - name: "Fa0/5"
           mode: "trunk"
           nativeVlan: 5
           vlans:
@@ -60,7 +60,7 @@
             - num: 10
             - num: 50
 
-        - name: "FastEthernet6"
+        - name: "Fa0/6"
           mode: "trunk"
           nativeVlan: 5
           vlans:
@@ -68,7 +68,7 @@
             - num: 10
             - num: 50
 
-        - name: "GigaEthernet1"
+        - name: "Gi0/1"
           mode: "trunk"
           nativeVlan: 5
           vlans:
