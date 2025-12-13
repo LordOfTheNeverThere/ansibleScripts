@@ -11,4 +11,10 @@
 #   roles:
 #     - cisco800
 
-
+# - name: Provision SwCore1
+#   hosts: SwCore1
+#   gather_facts: no
+#   tasks:
+#   - ansible.builtin.include_role:
+#       name: ciscoSwitches
+#       tasks_from: provisioningSWCore1.yml 

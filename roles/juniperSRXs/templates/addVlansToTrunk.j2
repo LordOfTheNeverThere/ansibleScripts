@@ -3,6 +3,7 @@
 
 {% set vlanList = mapping.vlans | map(attribute='vlanNum') | map('string') | list %}
 
+delete interfaces {{ mapping.interface }} disable
 set interfaces {{ mapping.interface }} unit 0 family ethernet-switching port-mode trunk
 
 {% for vlan in mapping.vlans %}

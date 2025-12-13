@@ -1,0 +1,25 @@
+{% for interface in interfaces %}
+ interface {{ interface.name }}
+
+ {% if interface.active | default(True) %}
+ no shutdown
+ switchport mode {{ interface.mode }}
+
+ {% if (interface.mode | default("trunk")) == "trunk" %}
+ switchport {{ interface.mode }} native vlan {{ interface.nativeVlan }}
+
+ {% for vlan in interface.vlans %}
+ switchport {{ interface.mode }} allowed vlan add {{ vlan.num }}
+ {% endfor %}
+
+ {% else %}
+ switchport {{ interface.mode }} vlan {{ interface.nativeVlan }}
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ {% endif %}
+
+ {% else %}
+ shutdown
+ {% endif %}
+ 
+{% endfor %}

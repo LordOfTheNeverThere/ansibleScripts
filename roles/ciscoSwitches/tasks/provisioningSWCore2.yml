@@ -1,0 +1,81 @@
+
+- name: "Do Config Backup"
+  ansible.builtin.include_tasks: ../../cisco/tasks/getCurrentConfig.yml
+
+
+- block:
+  - name: Configure Interfaces without downlink
+    ansible.builtin.include_tasks: setInterfaceStatus.yml
+    vars:
+      interfaces:
+        - name: "Fa0/1"
+          active: False
+        - name: "Fa0/2"
+          active: False
+        - name: "Fa0/3"
+          active: False
+        - name: "Fa0/4"
+          active: False
+        - name: "Fa0/5"
+          active: False
+        - name: "Fa0/6"
+          active: False
+        - name: "Fa0/7"
+          active: False
+        - name: "Fa0/8"
+          active: False
+        - name: "Gi0/1"
+          mode: "trunk"
+          nativeVlan: 5
+          vlans:
+            - num: 5
+
+
+  - name: Creation of VLANs and Rapid PVST+
+    ansible.builtin.include_tasks: createVlansAndSTP.yml
+    vars:
+      vlans:
+        - num: 5
+          name: Management
+          stpBridgePriority: 32768
+
+        - num: 10
+          name: Internal_Services_Network
+          stpBridgePriority: 32768
+
+        - num: 50
+          name: External_Services_Network
+          stpBridgePriority: 4096
+
+
+  - name: Configure Redundant and Downlink
+    ansible.builtin.include_tasks: setInterfaceStatus.yml
+    vars:
+      interfaces:
+        - name: "FastEthernet5"
+          mode: "trunk"
+          nativeVlan: 5
+          vlans:
+            - num: 5
+            - num: 10
+            - num: 50
+
+        - name: "FastEthernet6"
+          mode: "trunk"
+          nativeVlan: 5
+          vlans:
+            - num: 5
+            - num: 10
+            - num: 50
+
+        - name: "GigaEthernet1"
+          mode: "trunk"
+          nativeVlan: 5
+          vlans:
+            - num: 5
+            - num: 50        
+
+
+  rescue:
+    - name: "Do Rollback"
+      ansible.builtin.include_tasks: ../../cisco/tasks/rollbackConfig.yml

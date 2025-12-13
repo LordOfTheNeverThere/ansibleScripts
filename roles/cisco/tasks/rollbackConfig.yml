@@ -4,7 +4,7 @@
 
 
 - ansible.builtin.set_fact:
-    loadPath: "roles/cisco800/files/backups/{{ fileName }}" 
+    loadPath: "roles/{{ role_name }}/files/backups/{{ fileName }}" 
   run_once: true
 
 
