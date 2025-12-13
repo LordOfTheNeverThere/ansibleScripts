@@ -1,0 +1,29 @@
+- ansible.builtin.set_fact:
+    fileName: "{{ inventory_hostname }}_configBackup.cfg"
+  run_once: true
+
+
+- ansible.builtin.set_fact:
+    loadPath: "roles/{{ role_name }}/files/backups/{{ fileName }}" 
+  run_once: true
+
+
+- name: Copy local .cfg file to router flash
+  ansible.netcommon.net_put:
+    src: "{{ loadPath }}"
+    dest: "flash:{{ fileName }}"
+    protocol: tftp
+
+- name: Replace running-config with the new file
+  cisco.ios.ios_command:
+    commands:
+      - command: "configure replace flash:{{ fileName }} force"
+  register: replaceOutput
+
+- name: Show the output of the replace operation
+  debug:
+    var: replaceOutput.stdout
+
+- name: Save running-config to startup-config
+  cisco.ios.ios_config:
+    save_when: always

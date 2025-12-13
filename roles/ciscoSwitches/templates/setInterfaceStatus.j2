@@ -7,10 +7,7 @@
 
  {% if (interface.mode | default("trunk")) == "trunk" %}
  switchport {{ interface.mode }} native vlan {{ interface.nativeVlan }}
-
- {% for vlan in interface.vlans %}
- switchport {{ interface.mode }} allowed vlan add {{ vlan.num }}
- {% endfor %}
+ switchport {{ interface.mode }} allowed vlan {{ interface.vlans }}
 
  {% else %}
  switchport {{ interface.mode }} vlan {{ interface.nativeVlan }}
