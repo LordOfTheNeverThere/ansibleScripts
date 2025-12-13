@@ -1,6 +1,6 @@
 
-# - name: "Do Config Backup"
-#   ansible.builtin.include_tasks: ../../cisco/tasks/getCurrentConfig.yml
+- name: "Do Config Backup"
+  ansible.builtin.include_tasks: ../../cisco/tasks/getCurrentConfig.yml
 
 
 - block:

@@ -4,32 +4,6 @@
 
 
 - block:
-  - name: Configure Interfaces without downlink
-    ansible.builtin.include_tasks: setInterfaceStatus.yml
-    vars:
-      interfaces:
-        - name: "Fa0/1"
-          active: False
-        - name: "Fa0/2"
-          active: False
-        - name: "Fa0/3"
-          active: False
-        - name: "Fa0/4"
-          active: False
-        - name: "Fa0/5"
-          active: False
-        - name: "Fa0/6"
-          active: False
-        - name: "Fa0/7"
-          active: False
-        - name: "Fa0/8"
-          active: False
-        - name: "Gi0/1"
-          mode: "trunk"
-          nativeVlan: 5
-          vlans:
-            - num: 5
-
 
   - name: Creation of VLANs and Rapid PVST+
     ansible.builtin.include_tasks: createVlansAndSTP.yml
@@ -48,32 +22,42 @@
           stpBridgePriority: 4096
 
 
-  - name: Configure Redundant and Downlink
+  - name: Configure Interfaces without downlink
     ansible.builtin.include_tasks: setInterfaceStatus.yml
     vars:
       interfaces:
+        - name: "Fa0/1"
+          active: False
+
+        - name: "Fa0/2"
+          active: False
+
+        - name: "Fa0/3"
+          active: False
+
+        - name: "Fa0/4"
+          active: False
+
         - name: "Fa0/5"
           mode: "trunk"
           nativeVlan: 5
-          vlans:
-            - num: 5
-            - num: 10
-            - num: 50
+          vlans: "5,10,50"
 
         - name: "Fa0/6"
           mode: "trunk"
           nativeVlan: 5
-          vlans:
-            - num: 5
-            - num: 10
-            - num: 50
+          vlans: "5,10,50"
+
+        - name: "Fa0/7"
+          active: False
+
+        - name: "Fa0/8"
+          active: False
 
         - name: "Gi0/1"
           mode: "trunk"
           nativeVlan: 5
-          vlans:
-            - num: 5
-            - num: 50        
+          vlans: "5,50"  
 
 
   rescue:

@@ -4,38 +4,6 @@
 
 
 - block:
-  - name: Configure Interfaces without downlink
-    ansible.builtin.include_tasks: setInterfaceStatus.yml
-    vars:
-      interfaces:
-        - name: "Fa0/1"
-          active: False
-        - name: "Fa0/2"
-          active: False
-        - name: "Fa0/3"
-          active: False
-        - name: "Fa0/4"
-          active: False
-        - name: "Fa0/5"
-          active: False
-        - name: "Fa0/6"
-          active: False
-
-        - name: "Fa0/7"
-          mode: "trunk"
-          nativeVlan: 5
-          vlans:
-            - num: 5
-
-        - name: "Fa0/8"
-          mode: "trunk"
-          nativeVlan: 5
-          vlans:
-            - num: 5
-          
-          
-        - name: "Gi0/1"
-          active: False
 
 
   - name: Creation of VLANs and Rapid PVST+
@@ -55,10 +23,19 @@
           stpBridgePriority: 28672
 
 
-  - name: Configure Downlinks and Uplinks with new vlans
+  - name: Configure Interfaces without downlink
     ansible.builtin.include_tasks: setInterfaceStatus.yml
     vars:
       interfaces:
+        - name: "Fa0/1"
+          active: False
+        - name: "Fa0/2"
+          active: False
+        - name: "Fa0/3"
+          active: False
+        - name: "Fa0/4"
+          active: False
+
         - name: "Fa0/5"
           mode: "access"
           nativeVlan: 10
@@ -71,19 +48,16 @@
         - name: "Fa0/7"
           mode: "trunk"
           nativeVlan: 5
-          vlans:
-            - num: 5
-            - num: 10
-            - num: 50
+          vlans: "5,10,50"
 
         - name: "Fa0/8"
           mode: "trunk"
           nativeVlan: 5
-          vlans:
-            - num: 5
-            - num: 10
-            - num: 50      
-
+          vlans: "5,10,50"  
+          
+          
+        - name: "Gi0/1"
+          active: False
 
   rescue:
     - name: "Do Rollback"
