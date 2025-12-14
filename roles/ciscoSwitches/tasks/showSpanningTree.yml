@@ -1,0 +1,6 @@
+- cisco.ios.ios_command:
+    commands:
+      - show spanning-tree
+    register: spanningTree
+- debug:
+    var: spanningTree.stdout_lines
