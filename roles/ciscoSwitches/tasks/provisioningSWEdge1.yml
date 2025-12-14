@@ -61,6 +61,9 @@
   - name: "Set the default-gateway to the VRRP Virtual IP of the routers"
     ansible.builtin.include_tasks: setSwitchDefGateway.yml
 
+  - name: "Change password of User to the strongest one"
+    ansible.builtin.include_tasks: ../../cisco/tasks/setUserAndPassword.yml
+
   - name: "Show spanning tree related information"
     ansible.builtin.include_tasks: showSpanningTree.yml
 

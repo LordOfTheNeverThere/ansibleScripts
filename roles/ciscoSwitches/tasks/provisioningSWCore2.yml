@@ -66,6 +66,9 @@
   - name: "Show spanning tree related information"
     ansible.builtin.include_tasks: showSpanningTree.yml
 
+  - name: "Change password of User to the strongest one"
+    ansible.builtin.include_tasks: ../../cisco/tasks/setUserAndPassword.yml
+
   rescue:
     - name: "Do Rollback"
       ansible.builtin.include_tasks: ../../cisco/tasks/rollbackConfig.yml

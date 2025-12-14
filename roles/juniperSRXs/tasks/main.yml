@@ -32,6 +32,9 @@
     - name: "Enable VRRP for management subnet"
       ansible.builtin.include_tasks: setVRRP.yml
 
+    - name: "Change password of User to the strongest one"
+      ansible.builtin.include_tasks: setUserAndPassword.yml
+
   rescue:
     - name: "Do Rollback"
       ansible.builtin.include_tasks: rollback.yml
