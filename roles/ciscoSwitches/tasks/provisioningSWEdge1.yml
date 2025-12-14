@@ -55,10 +55,12 @@
           nativeVlan: 5
           vlans: "5,10,50"  
           
-          
         - name: "Gi0/1"
           active: False
-# TODO: Update default Gateway to virtual IP
+
+  - name: "Set the default-gateway to the VRRP Virtual IP of the routers"
+    ansible.builtin.include_tasks: setSwitchDefGateway.yml
+
   rescue:
     - name: "Do Rollback"
       ansible.builtin.include_tasks: ../../cisco/tasks/rollbackConfig.yml
