@@ -1,5 +1,4 @@
 defaultGateway: 10.3.1.2
-newUser: miguel
 
 interfaceVlansConfig:
 - index: 0

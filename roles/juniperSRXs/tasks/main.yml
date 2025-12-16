@@ -38,3 +38,8 @@
   rescue:
     - name: "Do Rollback"
       ansible.builtin.include_tasks: rollback.yml
+
+
+
+- name: Reset connection to ensure clean slate for next device
+  meta: reset_connection

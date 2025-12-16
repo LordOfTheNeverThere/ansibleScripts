@@ -4,9 +4,6 @@
 
 
 - block:
-
-
-
   - name: Creation of VLANs and Rapid PVST+
     ansible.builtin.include_tasks: createVlansAndSTP.yml
     vars:
@@ -22,7 +19,6 @@
         - num: 50
           name: "ExternalServices"
           stpBridgePriority: 32768
-
 
 
   - name: Configure Interfaces without downlink

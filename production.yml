@@ -63,3 +63,4 @@ networking:
         firewalls:
     vars:
         ansible_user: miguel
+        newUser: miguel

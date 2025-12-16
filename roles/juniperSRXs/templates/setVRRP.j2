@@ -1,6 +1,7 @@
 
 set interfaces {{ vrrpInterface }} family inet address {{ physicalIP }}/{{ subnet }} vrrp-group 1 virtual-address {{ vrrpVirtualIp }}
 set interfaces {{ vrrpInterface }} family inet address {{ physicalIP }}/{{ subnet }} vrrp-group 1 priority {{ vrrpPriority }}
+set interfaces {{ vrrpInterface }} family inet address {{ physicalIP }}/{{ subnet }} vrrp-group 1 accept-data
 
 {% if vrrpPreempt | default(False) %}
 set interfaces {{ vrrpInterface }} family inet address {{ physicalIP }}/{{ subnet }} vrrp-group 1 preempt
