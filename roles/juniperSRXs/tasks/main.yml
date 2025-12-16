@@ -34,6 +34,7 @@
 
     - name: "Change password of User to the strongest one"
       ansible.builtin.include_tasks: setUserAndPassword.yml
+        
 
   rescue:
     - name: "Do Rollback"

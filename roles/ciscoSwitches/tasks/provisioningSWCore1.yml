@@ -67,3 +67,7 @@
   rescue:
     - name: "Do Rollback"
       ansible.builtin.include_tasks: ../../cisco/tasks/rollbackConfig.yml
+
+
+- name: Reset connection to ensure clean slate for next device
+  meta: reset_connection

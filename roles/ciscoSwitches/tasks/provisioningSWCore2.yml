@@ -59,10 +59,6 @@
           nativeVlan: 5
           vlans: "5,50"
 
-
-  - name: "Set the default-gateway to the VRRP Virtual IP of the routers"
-    ansible.builtin.include_tasks: setSwitchDefGateway.yml
-
   - name: "Show spanning tree related information"
     ansible.builtin.include_tasks: showSpanningTree.yml
 
@@ -72,3 +68,10 @@
   rescue:
     - name: "Do Rollback"
       ansible.builtin.include_tasks: ../../cisco/tasks/rollbackConfig.yml
+
+
+
+
+
+- name: Reset connection to ensure clean slate for next device
+  meta: reset_connection

@@ -5,12 +5,11 @@ cisco:
         SwEdge1:
         ciscoRouter:
     vars:
-        ansible_password: "{{ numberPasswordWeak }}"
         ansible_connection: network_cli
         ansible_network_os: ios
         ansible_become: yes
         ansible_become_method: enable
-        ansible_become_pass: "{{ textPassword }}"
+        ansible_become_pass: "{{ numberPasswordStrong }}"
 
 routers:
     hosts:
@@ -20,7 +19,6 @@ routers:
         juniperRouter:
             ansible_host: 10.2.1.1 
             ansible_password: "{{ textPassword }}"
-
     vars:
         vrrpVirtualIp: 10.5.5.1
 
@@ -63,4 +61,6 @@ networking:
         firewalls:
     vars:
         ansible_user: miguel
-        newUser: miguel
+        ansible_password: "{{ numberPasswordStrong }}"
+        newUser: ansible
+        
