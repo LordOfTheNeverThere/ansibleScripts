@@ -2,3 +2,4 @@
   ansible.builtin.yum:
     name: "{{ packagesToInstall }}"
     state: latest
+    disable_gpg_check: "{{ disableGPG | default(False) }}"

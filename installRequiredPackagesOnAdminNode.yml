@@ -11,6 +11,11 @@
         description: Docker Custom Repo
         gpgkey: "https://download.docker.com/linux/rhel/gpg"
 
+      - name: gitlab.com_paulcarroty_vscodium_repo
+        url: https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/
+        description: Codium Custom Repo
+        gpgkey: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+
   - ansible.builtin.include_role:
       name: yumLinuxBox
       tasks_from: install.yml
@@ -24,7 +29,6 @@
         - docker-buildx-plugin 
         - docker-compose-plugin
 
-
   - ansible.builtin.include_role:
       name: yumLinuxBox
       tasks_from: enableDaemon.yml
@@ -32,5 +36,29 @@
       daemons: 
       - name: docker
 
-  
+
+## Installing Fresh
+    
+  - name: Get the latest RPM download URL from GitHub API
+    ansible.builtin.uri:
+      url: https://api.github.com/repos/sinelaw/fresh/releases/latest
+      return_content: yes
+    register: githubRelease
+
+  - name: Extract the correct RPM URL for this architecture
+    set_fact:
+      freshRpmURL: >-
+        {{ 
+          githubRelease.json.assets 
+          | map(attribute='browser_download_url') 
+          | select('search', ansible_architecture + '.rpm') 
+          | first 
+        }}
+
+  - ansible.builtin.include_role:
+      name: yumLinuxBox
+      tasks_from: install.yml
+    vars:
+      packagesToInstall: "{{ freshRpmURL }}"
+      disableGPG: True
       
