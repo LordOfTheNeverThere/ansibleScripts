@@ -1,23 +1,22 @@
 
-# - name: Provision juniperRouter
-#   hosts: juniperRouter
-#   connection: local
-#   roles:
-#     - juniperSRXs
+- name: Provision juniperRouter
+  hosts: juniperRouter
+  roles:
+    - juniperSRXs
 
-# - name: Provision ciscoRouter
-#   hosts: ciscoRouter
-#   gather_facts: no
-#   roles:
-#     - cisco800
+- name: Provision ciscoRouter
+  hosts: ciscoRouter
+  gather_facts: no
+  roles:
+    - cisco800
 
-# - name: Provision SwCore1
-#   hosts: SwCore1
-#   gather_facts: no
-#   tasks:
-#   - ansible.builtin.include_role:
-#       name: ciscoSwitches
-#       tasks_from: provisioningSWCore1.yml
+- name: Provision SwCore1
+  hosts: SwCore1
+  gather_facts: no
+  tasks:
+  - ansible.builtin.include_role:
+      name: ciscoSwitches
+      tasks_from: provisioningSWCore1.yml
 
 - name: Provision SwCore2
   hosts: SwCore2
@@ -29,10 +28,10 @@
 
 
 
-# - name: Provision SwEdge1
-#   hosts: SwEdge1
-#   gather_facts: no
-#   tasks:
-#   - ansible.builtin.include_role:
-#       name: ciscoSwitches
-#       tasks_from: provisioningSWEdge1.yml 
+- name: Provision SwEdge1
+  hosts: SwEdge1
+  gather_facts: no
+  tasks:
+  - ansible.builtin.include_role:
+      name: ciscoSwitches
+      tasks_from: provisioningSWEdge1.yml 

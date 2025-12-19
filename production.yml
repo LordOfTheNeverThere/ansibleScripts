@@ -19,6 +19,8 @@ routers:
         juniperRouter:
             ansible_host: 10.2.1.1 
             ansible_password: "{{ textPassword }}"
+            ansible_connection: juniper.device.pyez
+            ansible_user: miguel
     vars:
         vrrpVirtualIp: 10.5.5.1
 
