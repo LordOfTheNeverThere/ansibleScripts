@@ -1,0 +1,23 @@
+ansible_connection: network_cli
+ansible_network_os: ios
+ansible_become: yes
+ansible_become_method: enable
+ansible_become_pass: "{{ numberPasswordStrong }}"
+newUser: ansible
+ansible_user: miguel
+ansible_password: "{{ numberPasswordStrong }}"
+
+
+
+networksAllowedSSH:
+- index: 0
+  ip: 10.7.7.74
+  wildMask: 0.0.0.0
+
+- index: 1
+  ip: 10.2.1.0
+  wildMask: 0.0.0.7
+
+- index: 2
+  ip: 10.10.10.0
+  wildMask: 0.0.0.15

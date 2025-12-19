@@ -1,4 +1,6 @@
-
+ansible_password: "{{ textPassword }}"
+ansible_connection: juniper.device.pyez
+ansible_user: miguel
 
 interfacesToConfigure:
 

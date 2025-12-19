@@ -63,6 +63,9 @@
 
   - name: "Change password of User to the strongest one"
     ansible.builtin.include_tasks: ../../cisco/tasks/setUserAndPassword.yml
+  
+  - name: Set SSH Daemon in Switch
+    ansible.builtin.include_tasks: ../../cisco/tasks/configureSSHDaemon.yml
 
   rescue:
     - name: "Do Rollback"

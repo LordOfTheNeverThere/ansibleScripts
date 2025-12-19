@@ -1,15 +1,5 @@
-cisco:
-    hosts:
-        SwCore1:
-        SwCore2:
-        SwEdge1:
-        ciscoRouter:
-    vars:
-        ansible_connection: network_cli
-        ansible_network_os: ios
-        ansible_become: yes
-        ansible_become_method: enable
-        ansible_become_pass: "{{ numberPasswordStrong }}"
+
+
 
 routers:
     hosts:
@@ -18,11 +8,7 @@ routers:
 
         juniperRouter:
             ansible_host: 10.2.1.1 
-            ansible_password: "{{ textPassword }}"
-            ansible_connection: juniper.device.pyez
-            ansible_user: miguel
-    vars:
-        vrrpVirtualIp: 10.5.5.1
+        
 
 
 
@@ -61,8 +47,12 @@ networking:
         routers:
         switches:
         firewalls:
-    vars:
-        ansible_user: miguel
-        ansible_password: "{{ numberPasswordStrong }}"
-        newUser: ansible
         
+
+
+cisco:
+    hosts:
+        SwCore1:
+        SwCore2:
+        SwEdge1:
+        ciscoRouter:

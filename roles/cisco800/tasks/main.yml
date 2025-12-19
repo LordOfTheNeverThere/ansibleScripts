@@ -15,7 +15,7 @@
     ansible.builtin.include_tasks: setDefGateRouteRouting.yml
 
   - name: Set SSH Daemon in Router
-    ansible.builtin.include_tasks: configureSSHDaemon.yml
+    ansible.builtin.include_tasks: ../../cisco/tasks/configureSSHDaemon.yml
 
   - name: Enable OSPF dynamic Routing
     ansible.builtin.include_tasks: enableOSPFRouting.yml

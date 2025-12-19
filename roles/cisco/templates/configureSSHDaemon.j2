@@ -2,11 +2,18 @@
 
 ip access-list standard neoSshACL
 {% for item in networksAllowedSSH %}
- permit {{ item.ip }} {{ item.submask }}
+
+{% if item.wildMask=="0.0.0.0" %}
+ permit host {{ item.ip }}
+
+{% else %}
+ permit {{ item.ip }} {{ item.wildMask }}
+{% endif %}
+
 {% endfor %}
  deny any log
 
-line vty 0 4
+line vty 0 {{ lastVtyLine | default(15) }}
  access-class neoSshACL in
  exec-timeout 30 0
  login local

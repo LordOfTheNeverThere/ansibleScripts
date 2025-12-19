@@ -67,6 +67,9 @@
   - name: "Show spanning tree related information"
     ansible.builtin.include_tasks: showSpanningTree.yml
 
+  - name: Set SSH Daemon in Switch
+    ansible.builtin.include_tasks: ../../cisco/tasks/configureSSHDaemon.yml
+
   rescue:
     - name: "Do Rollback"
       ansible.builtin.include_tasks: ../../cisco/tasks/rollbackConfig.yml

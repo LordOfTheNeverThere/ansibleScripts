@@ -1,3 +1,0 @@
-- ios_config:
-    src: roles/cisco800/templates/configureSSHDaemon.j2
-    save_when: changed
