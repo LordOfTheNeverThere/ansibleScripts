@@ -1,0 +1,3 @@
+ansible_user: miguel
+ansible_password: "{{ numberPasswordStrong }}"
+ansible_become_password: "{{ numberPasswordStrong }}"

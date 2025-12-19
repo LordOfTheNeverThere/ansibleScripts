@@ -35,7 +35,7 @@ servers:
             ansible_host: 10.2.1.2
             ansible_user: root
         adminNode:
-            ansible_host: 10.100.100.2
+            ansible_host: 10.2.1.4
         internalNetworkServer:
             ansible_host: 10.10.10.5
         externalNetworkServer:

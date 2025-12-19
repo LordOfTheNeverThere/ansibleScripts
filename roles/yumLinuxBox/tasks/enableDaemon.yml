@@ -1,0 +1,5 @@
+- name: Enable at boot service {{ item.name }} 
+  ansible.builtin.systemd_service:
+    name: "{{ item.name }}"
+    enabled: True
+  loop: "{{ daemons }}"

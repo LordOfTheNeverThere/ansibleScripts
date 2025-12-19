@@ -1,0 +1,8 @@
+- name: "Add {{ item.name }} repositories"
+  ansible.builtin.yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    baseurl: "{{ item.url }}"
+    gpgcheck: True
+    gpgkey: "{{ item.gpgkey }}"
+  loop: "{{ reposToAdd }}"

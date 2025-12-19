@@ -1,0 +1,36 @@
+- hosts: adminNode
+  become: True
+  tasks:
+  - ansible.builtin.include_role:
+      name: yumLinuxBox
+      tasks_from: addRepo.yml
+    vars:
+      reposToAdd: 
+      - name: docker-ce-stable
+        url: "https://download.docker.com/linux/rhel/{{ ansible_distribution_major_version }}/$basearch/stable"
+        description: Docker Custom Repo
+        gpgkey: "https://download.docker.com/linux/rhel/gpg"
+
+  - ansible.builtin.include_role:
+      name: yumLinuxBox
+      tasks_from: install.yml
+    vars:
+      packagesToInstall: 
+        - git
+        - dnf-plugins-core
+        - docker-ce 
+        - docker-ce-cli 
+        - containerd.io 
+        - docker-buildx-plugin 
+        - docker-compose-plugin
+
+
+  - ansible.builtin.include_role:
+      name: yumLinuxBox
+      tasks_from: enableDaemon.yml
+    vars:
+      daemons: 
+      - name: docker
+
+  
+      
