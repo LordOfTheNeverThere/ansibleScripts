@@ -1,0 +1,22 @@
+- name: Get the latest RPM download URL from GitHub API
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/sinelaw/fresh/releases/latest
+    return_content: yes
+  register: githubRelease
+
+- name: Extract the correct RPM URL for this architecture
+  set_fact:
+    freshRpmURL: >-
+      {{ 
+        githubRelease.json.assets 
+        | map(attribute='browser_download_url') 
+        | select('search', ansible_architecture + '.rpm') 
+        | first 
+      }}
+
+
+
+- ansible.builtin.include_tasks: install.yml
+  vars:
+    packagesToInstall: "{{ freshRpmURL }}"
+    disableGPG: True
