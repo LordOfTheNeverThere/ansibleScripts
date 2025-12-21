@@ -1,0 +1,18 @@
+
+
+
+- name: Create Container for NFS
+  community.proxmox.proxmox:
+    vmid: "{{ vmid }}"
+    api_user: "{{ apiUser | default(root@pam) }}"
+    api_password: "{{ ansible_password }}"
+    api_host: "{{ ansible_host }}"
+    description: "NFS container for NAS file sharing"
+    onboot: True
+    ostype: alpine
+    unprivileged: False
+    ansible_host: nfsNASNode
+    features: 
+      - nesting=1
+      - mount=nfs
+  register: lxc_config
