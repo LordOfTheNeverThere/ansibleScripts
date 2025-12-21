@@ -1,3 +1,12 @@
 
+
+
+
+
 - ansible.builtin.include_tasks: installNFSDaemon.yml
 - ansible.builtin.include_tasks: allowHostsOnTheSharedStorage.yml
+
+- name: Reload service nfs-kernel-server, in all cases
+  ansible.builtin.service:
+    name:  nfs-kernel-server
+    state: reloaded

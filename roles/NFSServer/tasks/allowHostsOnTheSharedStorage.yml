@@ -1,8 +1,15 @@
+- name: Create subdirectories of /exports to share
+  ansible.builtin.file:
+    path: /exports/{{ item.subdirectory }}/
+    state: directory
+    mode: '0755'
+  loop: subdirectoriesExports
+
+
 - lineinfile:
     path: /etc/exports
     line: "{{ item.line }}"
     create: yes
   loop: "{{ linesInEtcExports }}"
-  notify: Reload NFS
 
-#
+

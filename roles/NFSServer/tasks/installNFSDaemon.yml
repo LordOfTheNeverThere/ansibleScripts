@@ -1,9 +1,9 @@
 
-- name: Create exports directory
-  ansible.builtin.file:
-    path: /exports
-    state: directory
-    mode: '0755'
+# - name: Create exports directory
+#   ansible.builtin.file:
+#     path: /exports
+#     state: directory
+#     mode: '0755'
 
 
 - name: Installing nfs-kernel-server

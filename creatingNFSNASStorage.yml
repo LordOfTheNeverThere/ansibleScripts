@@ -1,8 +1,8 @@
 - hosts: proxmoxNAS
   tasks: 
     - ansible.builtin.include_role:
-      name: proxmox
-      tasks_from: installingNFSContainer.yml
+        name: proxmox
+        tasks_from: createNFSContainer.yml
       vars:
         nic: "nicWired"
         containerIPGateway: "10.10.10.1"
@@ -10,8 +10,8 @@
         bridge: "vmbr0"
         proxmoxMountPoint: "/mnt/nfs/{{ ansible_hostname }}/export/"
         containerMountPoint: /export/
-
+    
   
-- hosts: NFSNASContainer
-  roles:
-    - NFSServer
+# - hosts: NFSNASContainer
+#   roles:
+#     - NFSServer

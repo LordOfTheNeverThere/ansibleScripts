@@ -31,17 +31,21 @@ firewalls:
 
 servers:
     hosts:
-        proxmox:
+        proxmoxAdmin:
             ansible_host: 10.2.1.2
             ansible_user: root
         adminNode:
             ansible_host: 10.2.1.4
+            ansible_user: miguel
         proxmoxNAS:
             ansible_host: 10.10.10.2
+            ansible_user: root
         NFSNASContainer:
             ansible_host: 10.10.10.5
+            ansible_user: root
         externalNetworkServer:
             ansible_host: 10.50.50.5
+            
 
 
 networking:
