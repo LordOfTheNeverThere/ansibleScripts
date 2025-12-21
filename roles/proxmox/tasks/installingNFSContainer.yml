@@ -1,9 +1,5 @@
-
-
-
 - name: Create Container for NFS
   community.proxmox.proxmox:
-    vmid: "{{ vmid }}"
     api_user: "{{ apiUser | default(root@pam) }}"
     api_password: "{{ ansible_password }}"
     api_host: "{{ ansible_host }}"
@@ -11,7 +7,13 @@
     onboot: True
     ostype: alpine
     unprivileged: False
-    ansible_host: nfsNASNode
+    hostname: "{{ ansible_hostname }}"
+    netif:
+      net0: "name={{ nic }},gw={{ containerIPGateway }},ip={{ containerIp }},bridge={{ bridge }}"
+    mount_volumes:
+      - id: mp0
+        host_path: "{{ proxmoxMountPoint }}"
+        mountpoint: "{{ containerMountPoint }}"
     features: 
       - nesting=1
       - mount=nfs

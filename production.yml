@@ -36,7 +36,9 @@ servers:
             ansible_user: root
         adminNode:
             ansible_host: 10.2.1.4
-        internalNetworkServer:
+        proxmoxNAS:
+            ansible_host: 10.10.10.2
+        NFSNASContainer:
             ansible_host: 10.10.10.5
         externalNetworkServer:
             ansible_host: 10.50.50.5

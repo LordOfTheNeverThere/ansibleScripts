@@ -1,0 +1,8 @@
+- lineinfile:
+    path: /etc/exports
+    line: "{{ item.line }}"
+    create: yes
+  loop: "{{ linesInEtcExports }}"
+  notify: Reload NFS
+
+#

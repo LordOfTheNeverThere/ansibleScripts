@@ -1,0 +1,12 @@
+
+- name: Create exports directory
+  ansible.builtin.file:
+    path: /exports
+    state: directory
+    mode: '0755'
+
+
+- name: Installing nfs-kernel-server
+  community.general.apk:
+    name: nfs-kernel-server
+    update_cache: true

@@ -1,0 +1,3 @@
+
+- ansible.builtin.include_tasks: installNFSDaemon.yml
+- ansible.builtin.include_tasks: allowHostsOnTheSharedStorage.yml
