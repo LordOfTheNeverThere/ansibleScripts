@@ -12,6 +12,7 @@
         bridge: "vmbr0"
         proxmoxMountPoint: "/mnt/nfs/{{ ansible_hostname }}/export/"
         containerMountPoint: /export/
+        containerName: NFSNASContainer
     
   
 # - hosts: NFSNASContainer

@@ -7,7 +7,7 @@
 
 - name: Create Container for NFS
   community.proxmox.proxmox:
-    state: started
+    state: present
     vmid: 100
     api_user: "{{ apiUser | default('root@pam') }}"
     api_password: "{{ ansible_password }}"
@@ -18,7 +18,7 @@
     ostemplate: "{{ osTemplate | default('local:vztmpl/alpine-3.22-default_20250617_amd64.tar.xz') }}"
     unprivileged: False
     node: "{{ ansible_hostname }}"
-    hostname: "{{ ansible_hostname }}"
+    hostname: "{{ containerName }}"
     cpus: "{{ containerCPUs }}"
     memory: "{{ containerRAM }}"
     netif:
@@ -34,4 +34,13 @@
       - nesting=1
       - mount=nfs
     timeout: 120
+  delegate_to: localhost
+
+- name: Start the container
+  community.proxmox.proxmox:
+    state: started
+    vmid: 100
+    api_user: "{{ apiUser | default('root@pam') }}"
+    api_password: "{{ ansible_password }}"
+    api_host: "{{ ansible_host }}"
   delegate_to: localhost
