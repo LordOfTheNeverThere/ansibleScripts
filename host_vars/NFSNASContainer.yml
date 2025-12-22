@@ -8,8 +8,10 @@ linesInEtcExports:
   - line: "/exports/backups 10.2.1.4/32(rw,sync,no_subtree_check,no_root_squash)"
   - line: "/exports/logs 10.2.1.4/32(rw,sync,no_subtree_check,no_root_squash)"
 
+  - line: "/exports/logs/OPNSense 10.2.1.2/32(rw,sync,no_subtree_check,no_root_squash)"
 
 subdirectoriesExports:
   - subdirectory: "miguel"
   - subdirectory: "backups"
   - subdirectory: "logs"
+  - subdirectory: "logs/OPNSense"

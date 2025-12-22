@@ -6,7 +6,9 @@
       vars:
         nic: "nicWired"
         containerIPGateway: "10.10.10.1"
-        containerIp: "10.10.10.5"
+        containerIp: "10.10.10.5/28"
+        containerCPUs: 3
+        containerRAM: 6000
         bridge: "vmbr0"
         proxmoxMountPoint: "/mnt/nfs/{{ ansible_hostname }}/export/"
         containerMountPoint: /export/

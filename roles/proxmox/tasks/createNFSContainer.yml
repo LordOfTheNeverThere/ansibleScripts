@@ -1,17 +1,31 @@
+- name: Create Directory on Host that will be used as NFS storage
+  ansible.builtin.file:
+    path: "{{ proxmoxMountPoint }}"
+    state: directory
+    mode: '0755'
+
+
 - name: Create Container for NFS
   community.proxmox.proxmox:
+    state: started
     vmid: 100
     api_user: "{{ apiUser | default('root@pam') }}"
     api_password: "{{ ansible_password }}"
+    password: "{{ ansible_password }}"
     api_host: "{{ ansible_host }}"
     description: "NFS container for NAS file sharing"
     onboot: True
-    ostype: alpine
+    ostemplate: "{{ osTemplate | default('local:vztmpl/alpine-3.22-default_20250617_amd64.tar.xz') }}"
     unprivileged: False
     node: "{{ ansible_hostname }}"
     hostname: "{{ ansible_hostname }}"
+    cpus: "{{ containerCPUs }}"
+    memory: "{{ containerRAM }}"
     netif:
       net0: "name={{ nic }},gw={{ containerIPGateway }},ip={{ containerIp }},bridge={{ bridge }}"
+    disk_volume:
+      storage: local-lvm
+      size: 8
     mount_volumes:
       - id: mp0
         host_path: "{{ proxmoxMountPoint }}"
@@ -19,4 +33,5 @@
     features: 
       - nesting=1
       - mount=nfs
+    timeout: 120
   delegate_to: localhost
