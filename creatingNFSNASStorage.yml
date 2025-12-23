@@ -13,6 +13,7 @@
         proxmoxMountPoint: "/mnt/nfs/{{ ansible_hostname }}/export/"
         containerMountPoint: /export/
         containerName: NFSNASContainer
+        vmID: 100
     
   
 # - hosts: NFSNASContainer

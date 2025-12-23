@@ -3,7 +3,8 @@
 #   ansible.builtin.file:
 #     path: /exports
 #     state: directory
-#     mode: '0755'
+#     mode: '0755
+# I dont think this to be neccesary
 
 
 - name: Installing nfs-kernel-server

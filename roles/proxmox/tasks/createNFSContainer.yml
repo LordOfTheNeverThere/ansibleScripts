@@ -8,14 +8,14 @@
 - name: Create Container for NFS
   community.proxmox.proxmox:
     state: present
-    vmid: 100
+    vmid: "{{ vmID }}"
     api_user: "{{ apiUser | default('root@pam') }}"
     api_password: "{{ ansible_password }}"
     password: "{{ ansible_password }}"
     api_host: "{{ ansible_host }}"
     description: "NFS container for NAS file sharing"
     onboot: True
-    ostemplate: "{{ osTemplate | default('local:vztmpl/alpine-3.22-default_20250617_amd64.tar.xz') }}"
+    ostemplate: "{{ osTemplate | default('local:vztmpl/ubuntu-24.04-standard_24.04-2_amd64.tar.zst') }}"
     unprivileged: False
     node: "{{ ansible_hostname }}"
     hostname: "{{ containerName }}"
@@ -44,3 +44,11 @@
     api_password: "{{ ansible_password }}"
     api_host: "{{ ansible_host }}"
   delegate_to: localhost
+
+- name: "Allowing SSH for user root"
+  ansible.builtin.include_tasks: executeCommandInLXC.yml
+  vars:
+    containerID: "{{ vmID }}"
+    lxcCommands:
+      - command: sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config && systemctl restart ssh
+      - command: systemctl restart ssh
