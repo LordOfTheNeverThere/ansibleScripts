@@ -45,10 +45,25 @@
     api_host: "{{ ansible_host }}"
   delegate_to: localhost
 
-- name: "Allowing SSH for user root"
+
+- ansible.builtin.set_fact:
+    userToCreateOnLXC: "{{ hostvars['NFSNASContainer']['ansible_user'] }}"
+
+- name: "Check if {{ userToCreateOnLXC }} user is created"
   ansible.builtin.include_tasks: executeCommandInLXC.yml
   vars:
     containerID: "{{ vmID }}"
+    lxcCommand: id "{{ userToCreateOnLXC }}"
+    ignore_errors: True
+  
+
+
+- name: "Allowing SSH for user root"
+  ansible.builtin.include_tasks: executeCommandsInLXC.yml
+  vars:
+    containerID: "{{ vmID }}"
     lxcCommands:
-      - command: sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config && systemctl restart ssh
+      - command: useradd -m -s /bin/bash "{{ userToCreateOnLXC }}" -G sudo 
+      - command: echo "{{ userToCreateOnLXC }}:{{ numberPasswordStrong }}" | chpasswd
       - command: systemctl restart ssh
+  # when: lxcCommandOut.rc != 0

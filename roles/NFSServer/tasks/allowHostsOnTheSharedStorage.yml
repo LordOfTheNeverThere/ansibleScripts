@@ -3,7 +3,7 @@
     path: /exports/{{ item.subdirectory }}/
     state: directory
     mode: '0755'
-  loop: subdirectoriesExports
+  loop: "{{ subdirectoriesExports }}"
 
 
 - lineinfile:

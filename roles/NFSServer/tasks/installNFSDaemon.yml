@@ -8,6 +8,6 @@
 
 
 - name: Installing nfs-kernel-server
-  community.general.apk:
+  ansible.builtin.apt:
     name: nfs-kernel-server
     update_cache: true

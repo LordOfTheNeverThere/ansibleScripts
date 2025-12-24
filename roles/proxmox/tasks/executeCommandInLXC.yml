@@ -1,5 +1,4 @@
 - name: Executing commands in LXC
-  command: pct exec "{{ containerID }}" -- /bin/bash -c "{{ item.command }}"
-  loop: "{{ lxcCommands }}"
-  loop_control:
-    label: "Command: {{ item.command }}"
+  command: pct exec "{{ containerID }}" -- /bin/bash -c "{{ lxcCommand }}"
+  ignore_errors: "{{ ignore_errors | default(False) }}"
+  register: lxcCommandOut
