@@ -1,14 +1,14 @@
 linesInEtcExports:
 
-  - line: "/exports/miguel 10.7.7.74/32(rw,sync,no_subtree_check,no_root_squash)"
-  - line: "/exports/backups 10.7.7.74/32(rw,sync,no_subtree_check,no_root_squash)"
-  - line: "/exports/logs 10.7.7.74/32(rw,sync,no_subtree_check,no_root_squash)"
+  - line: "/export/miguel 10.7.7.74/32(rw,sync,no_subtree_check,no_root_squash)"
+  - line: "/export/backups 10.7.7.74/32(rw,sync,no_subtree_check,no_root_squash)"
+  - line: "/export/logs 10.7.7.74/32(rw,sync,no_subtree_check,no_root_squash)"
 
-  - line: "/exports/miguel 10.2.1.4/32(rw,sync,no_subtree_check,no_root_squash)"
-  - line: "/exports/backups 10.2.1.4/32(rw,sync,no_subtree_check,no_root_squash)"
-  - line: "/exports/logs 10.2.1.4/32(rw,sync,no_subtree_check,no_root_squash)"
+  - line: "/export/miguel 10.2.1.4/32(rw,sync,no_subtree_check,no_root_squash)"
+  - line: "/export/backups 10.2.1.4/32(rw,sync,no_subtree_check,no_root_squash)"
+  - line: "/export/logs 10.2.1.4/32(rw,sync,no_subtree_check,no_root_squash)"
 
-  - line: "/exports/logs/OPNSense 10.2.1.2/32(rw,sync,no_subtree_check,no_root_squash)"
+  - line: "/export/logs/OPNSense 10.2.1.2/32(rw,sync,no_subtree_check,no_root_squash)"
 
 subdirectoriesExports:
   - subdirectory: "miguel"

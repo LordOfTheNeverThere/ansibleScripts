@@ -1,5 +1,6 @@
 - hosts: proxmoxNAS
   tasks: 
+
     - ansible.builtin.include_role:
         name: proxmox
         tasks_from: createNFSContainer.yml
@@ -14,8 +15,8 @@
         containerMountPoint: /export/
         containerName: NFSNASContainer
         vmID: "{{ hostvars['NFSNASContainer']['vmID'] }}"
-    
+
   
-# - hosts: NFSNASContainer
-#   roles:
-#     - NFSServer
+- hosts: NFSNASContainer
+  roles:
+    - NFSServer

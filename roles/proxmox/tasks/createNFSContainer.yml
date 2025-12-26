@@ -22,14 +22,10 @@
     cpus: "{{ containerCPUs }}"
     memory: "{{ containerRAM }}"
     netif:
-      net0: "name={{ nic }},gw={{ containerIPGateway }},ip={{ containerIp }},bridge={{ bridge }}"
+      net0: "name={{ nic }},gw={{ containerIPGateway }},hwaddr=BC:24:11:7E:7D:4A,ip={{ containerIp }},bridge={{ bridge }}"
     disk_volume:
       storage: local-lvm
-      size: 8
-    mount_volumes:
-      - id: mp0
-        host_path: "{{ proxmoxMountPoint }}"
-        mountpoint: "{{ containerMountPoint }}"
+      size: 100
     features: 
       - nesting=1
       - mount=nfs
@@ -46,24 +42,12 @@
   delegate_to: localhost
 
 
-- ansible.builtin.set_fact:
-    userToCreateOnLXC: "{{ hostvars['NFSNASContainer']['ansible_user'] }}"
-
-- name: "Check if {{ userToCreateOnLXC }} user is created"
-  ansible.builtin.include_tasks: executeCommandInLXC.yml
-  vars:
-    containerID: "{{ vmID }}"
-    lxcCommand: id "{{ userToCreateOnLXC }}"
-    ignore_errors: True
-  
-
 
 - name: "Allowing SSH for user root"
   ansible.builtin.include_tasks: executeCommandsInLXC.yml
   vars:
     containerID: "{{ vmID }}"
     lxcCommands:
-      - command: useradd -m -s /bin/bash "{{ userToCreateOnLXC }}" -G sudo 
-      - command: echo "{{ userToCreateOnLXC }}:{{ numberPasswordStrong }}" | chpasswd
+      - command: sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config && systemctl restart ssh
       - command: systemctl restart ssh
-  # when: lxcCommandOut.rc != 0
+      - command: ping 10.10.10.1 -c5

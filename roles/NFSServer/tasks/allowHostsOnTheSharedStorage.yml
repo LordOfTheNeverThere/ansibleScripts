@@ -1,6 +1,6 @@
 - name: Create subdirectories of /exports to share
   ansible.builtin.file:
-    path: /exports/{{ item.subdirectory }}/
+    path: /export/{{ item.subdirectory }}/
     state: directory
     mode: '0755'
   loop: "{{ subdirectoriesExports }}"

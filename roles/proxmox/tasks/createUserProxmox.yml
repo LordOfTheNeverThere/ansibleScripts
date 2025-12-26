@@ -1,0 +1,33 @@
+# 1. Create the user on the Linux OS level (PAM)
+- name: Create Linux system user
+  ansible.builtin.user:
+    name: "{{ usernameToCreate }}"
+    password: "{{ userPasswordToCreate }}"
+    shell: /bin/bash
+    groups: sudo
+    append: yes
+    state: present
+
+# 2. Register that PAM user into the Proxmox Dashboard
+- name: Create Proxmox user in the PAM realm
+  community.proxmox.proxmox_user:
+    api_user: "root@pam"
+    api_password: "{{ ansible_password }}"
+    userid:  "{{ usernameToCreate }}@pam"
+    api_host: "{{ ansible_host }}"
+    password: "{{ userPasswordToCreate }}"
+    state: present
+  delegate_to: localhost
+
+# 3. Assign a Role (e.g., Administrator) to the user
+- name: Assign Administrator permissions to user
+  community.proxmox.proxmox_access_acl:
+    api_user: "root@pam"
+    api_password: "{{ ansible_password }}"
+    api_host: "{{ ansible_host }}"
+    path: "/"
+    type: user
+    roleid: "Administrator"
+    ugid: "{{ usernameToCreate }}@pam"
+    state: present
+  delegate_to: localhost

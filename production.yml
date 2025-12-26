@@ -42,7 +42,7 @@ servers:
             ansible_user: root
         NFSNASContainer:
             ansible_host: 10.10.10.5
-            ansible_user: miguel
+            ansible_user: root
             vmID: 100
         externalNetworkServer:
             ansible_host: 10.50.50.5
